@@ -106,6 +106,30 @@ app.delete('/api/employees/:id',function(req,res){
 
 app.patch('/api/employees/:id',function(req,res){
     const emp = emps.filter((e) => e.id === req.params.id);
+    if(emp.length){
+        for(var i=0;i<emps.length;i++){
+            if(emps[i].id === emp[0].id){
+                count = i;
+                break;
+            }
+        }
+        if(req.body.Name){
+            emps[count].Name = req.body.Name;
+        }
+        if(req.body.Designation){
+            emps[count].Designation = req.body.Designation;
+        }
+        res.status(200).json({
+            'statusCode' : 200,
+            'message' : `Employee with id ${req.params.id} updated successfully`
+        });
+    }
+    else{
+        res.status(404).json({
+            'statusCode' : 404,
+            'message' : `Employee with id ${req.params.id} not found`
+        });
+    }
 });
 
 app.listen(3000,function(){
