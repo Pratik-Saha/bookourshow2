@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <title>Hello React</title>
+    </head>
+    <body>
+        <div id = "root">
+
+        </div>
+
+        <script src = "./js/react.development.js"></script>
+        <script src = "./js/react-dom.development.js"></script>
+        <script src = "./js/babel.js"></script>
+        <script type = "text/babel">
+            const rootHandle = document.getElementById('root')
+
+            class GenerateRandom extends React.Component{
+                constructor(){
+                    super()
+                    this.state = {
+                       users: [
+                           {id: 1, name: 'pratik', role: 'developer'},
+                           {id: 2, name: 'sachin', role: 'tester'},
+                           {id: 3, name: 'dhoni', role: 'cricketer'}
+                       ]
+                    }
+                }
+
+                handleClick = (user) => {
+                    const name = prompt('enter the name of the user to confirm')
+                    if(user.name == name){
+                        this.setState((prevstate) => {
+                            const newArr = prevstate.users.filter((user) => {
+                                    return name != user.name
+                            })
+                            return {
+                                users : newArr
+                            }
+                        })
+                    }
+                    else{
+                        alert('incorrect name..try again')
+                    }
+                }
+
+                render(){
+                    return (
+                        <div>
+                           
+                            <table border= "1">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Role</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        this.state.users.map((user,i) => {
+                                            return (
+                                                <tr key = {i}>
+                                                    <td>{user.id}</td>
+                                                    <td>{user.name}</td>
+                                                    <td>{user.role}</td>
+                                                    <td><button onClick = {() => {
+                                                        this.handleClick(user)
+                                                    }}>Remove</button></td>
+                                                </tr>
+                                            )
+
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    )
+                } 
+            }
+
+
+            ReactDOM.render(<GenerateRandom />,rootHandle)
+
+        </script>
+    </body>
+</html>
