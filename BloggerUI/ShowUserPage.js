@@ -22,9 +22,15 @@ class ShowUserPage extends React.Component{
                 .then((response) => {
                     response.data.map((post) => {
                         posts.push(post)
-                       this.setState({userName,posts})
+                        this.setState({userName,posts})
                     })
                 })
+                .catch((error) => {
+                    alert(error)
+                })
+            })
+            .catch((error) => {
+                alert(error)
             })
     }
 
