@@ -51,6 +51,17 @@ class ShowEmployee extends React.Component{
                 console.log(err)
             })
     }
+
+    handleClear = (e) => {
+        e.preventDefault()
+        this.setState({
+            department: '',
+            empId: '',
+            empIds: [],
+            found: false,
+            employee: {}
+        })
+    }
     render(){
         return(
             <div>
@@ -72,7 +83,7 @@ class ShowEmployee extends React.Component{
                         }
                     </select> <br /><br />
 
-                    <button onClick = {this.handleClick}>Get Details</button>    <button>Clear</button>
+                    <button onClick = {this.handleClick}>Get Details</button>    <button onClick={this.handleClear}>Clear</button>
                 </form> <br />
                 {
                     this.state.found && (
