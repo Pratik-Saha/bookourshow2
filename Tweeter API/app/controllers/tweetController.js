@@ -1,4 +1,4 @@
-const config = require('./config.default')
+const config = require('../../config/config.default')
 const Twitter = require('twitter')
 const client  = new Twitter(config)
 
